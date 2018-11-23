@@ -13,7 +13,7 @@ class Board:
         self.gameover = False
         self.winner = ' '
 
-    def printboard(self):
+    def _printboard(self):
         self.board = f'''
           {self.board_literal[0:3]} {map_1}
           {self.board_literal[3:6]} {map_2}
@@ -39,36 +39,36 @@ class Board:
 
     def checkboard(self):
         i = self.board_literal
-        print(i)
+
+        # board win conditions
         x = ('X', 'X', 'X')
         o = ('O', 'O', 'O')
 
-        if (i[0], i[1], i[2]) == x or (i[0], i[1], i[2]) == o:
+        if (i[0], i[1], i[2]) == x or (i[0], i[1], i[2]) == o:  # check for first row
             self.winner = i[0]
             self.gameover = True
-        elif (i[0], i[3], i[6]) == x or (i[0], i[3], i[6]) == o:
-            self.winner = i[0]
-            self.gameover = True
-        elif (i[0], i[4], i[8]) == x or (i[0], i[4], i[8]) == o:
-            self.winner = i[0]
-            self.gameover = True
-        elif (i[3], i[4], i[5]) == x or (i[3], i[4], i[5]) == o:
+        elif (i[3], i[4], i[5]) == x or (i[3], i[4], i[5]) == o:  # check for second row
             self.winner = i[3]
             self.gameover = True
-        elif (i[6], i[7], i[8]) == x or (i[6], i[7], i[8]) == o:
+        elif (i[6], i[7], i[8]) == x or (i[6], i[7], i[8]) == o:  # check for third row
             self.winner = i[6]
             self.gameover = True
-        elif (i[1], i[4], i[7]) == x or (i[1], i[4], i[7]) == o:
+        elif (i[0], i[3], i[6]) == x or (i[0], i[3], i[6]) == o:  # check for first column
+            self.winner = i[0]
+            self.gameover = True
+        elif (i[1], i[4], i[7]) == x or (i[1], i[4], i[7]) == o:  # check for second column
             self.winner = i[1]
             self.gameover = True
-        elif (i[2], i[5], i[8]) == x or (i[2], i[5], i[8]) == o:
+        elif (i[2], i[5], i[8]) == x or (i[2], i[5], i[8]) == o:  # check for third column
             self.winner = i[2]
             self.gameover = True
-        elif (i[2], i[4], i[6]) == x or (i[2], i[4], i[6]) == o:
+        elif (i[0], i[4], i[8]) == x or (i[0], i[4], i[8]) == o:  # check for l to r diagonal
+            self.winner = i[0]
+            self.gameover = True
+        elif (i[2], i[4], i[6]) == x or (i[2], i[4], i[6]) == o:  # check for r to l diagonal
             self.winner = i[2]
             self.gameover = True
-        elif '-' not in i:
-            print('Draw!')
+        elif '-' not in i:  # check for draw
             self.winner = 'Draw'
             self.gameover = True
 

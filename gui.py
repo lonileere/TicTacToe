@@ -13,18 +13,21 @@ class GameBoard:
         self.frame = Frame(master)
         self.frame.grid(row=0, column=0, sticky=N + S + E + W)
 
+        # creation of 3x3 grid
         for row_index in range(3):
             Grid.rowconfigure(self.frame, row_index, weight=1)
             for col_index in range(3):
                 Grid.columnconfigure(self.frame, col_index, weight=1)
-        Grid.rowconfigure(self.frame, 3, weight=1,)
 
         self.var = IntVar()
+        # single player function
         if not board.twoplayer:
             self.var.trace('w', self.turn)
+        # two player function
         elif board.twoplayer:
             self.var.trace('w', self.double)
 
+        # game field creation
         self.btn1 = Button(self.frame, command=lambda: self.var.set(0))
         self.btn1.grid(row=0, column=0, sticky=N + S + E + W)
 
@@ -52,6 +55,7 @@ class GameBoard:
         self.btn9 = Button(self.frame, command=lambda: self.var.set(8))
         self.btn9.grid(row=2, column=2, sticky=N + S + E + W)
 
+        # options creation
         self.reset = Button(self.frame, text="Reset")
         self.reset.bind("<Button-1>", self.restart)
         self.reset.grid(row=3, columnspan=3, sticky=N + S + E + W)
@@ -63,7 +67,7 @@ class GameBoard:
 
         self.btnlist = \
             [
-                   self.btn1,
+                   self.btn1,   # allows me to point to buttons depending on index in list
                    self.btn2,
                    self.btn3,
                    self.btn4,
@@ -89,9 +93,7 @@ class GameBoard:
     def turn(self, *args):
             if not board.twoplayer:
                 board.playermove(self.var.get())
-                print(board.gameover)
                 board.checkboard()
-                print(board.gameover)
                 self.disable()
                 if not board.gameover:
                     board.opponentmove()
@@ -112,17 +114,6 @@ class GameBoard:
                     self.disable()
                 self.winner()
 
-
-    def _drawtest(self, *args):
-            board.board_literal = ['O', 'X', 'O', 'O', 'X', 'X', 'X', 'O', 'X', ]
-            board.checkboard()
-            self.disable()
-            if not board.gameover:
-                board.opponentmove()
-                board.checkboard()
-                self.disable()
-            self.winner()
-
     def restart(self, *args):
             board.newgame()
             for index, i in enumerate(self.btnlist):
@@ -141,11 +132,9 @@ class GameBoard:
         if board.twoplayer:
             board.twoplayer = False
             self.toggle.config(text='Switch to Two Player Mode')
-            print(1)
         elif not board.twoplayer:
             board.twoplayer = True
             self.toggle.config(text='Switch to Single Player Mode')
-            print(2)
 
 
 
