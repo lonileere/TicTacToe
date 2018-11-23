@@ -38,40 +38,38 @@ class Board:
             self.checkboard()
 
     def checkboard(self):
-            if self.board_literal[0] == self.board_literal[1] == self.board_literal[2]:
-                if self.board_literal[0] != '-':
-                    self.winner = self.board_literal[0]
-                    self.gameover = True
-            elif self.board_literal[0] == self.board_literal[3] == self.board_literal[6]:
-                if self.board_literal[0] != '-':
-                    self.winner = self.board_literal[0]
-                    self.gameover = True
-            elif self.board_literal[0] == self.board_literal[4] == self.board_literal[8]:
-                if self.board_literal[0] != '-':
-                    self.winner = self.board_literal[0]
-                    self.gameover = True
-            elif self.board_literal[3] == self.board_literal[4] == self.board_literal[5]:
-                if self.board_literal[3] != '-':
-                    self.winner = self.board_literal[3]
-                    self.gameover = True
-            elif self.board_literal[6] == self.board_literal[7] == self.board_literal[8]:
-                if self.board_literal[6] != '-':
-                    self.winner = self.board_literal[6]
-                    self.gameover = True
-            elif self.board_literal[1] == self.board_literal[4] == self.board_literal[7]:
-                if self.board_literal[1] != '-':
-                    self.winner = self.board_literal[1]
-                    self.gameover = True
-            elif self.board_literal[2] == self.board_literal[5] == self.board_literal[8]:
-                if self.board_literal[2] != '-':
-                    self.winner = self.board_literal[2]
-                    self.gameover = True
-            elif self.board_literal[2] == self.board_literal[4] == self.board_literal[6]:
-                if self.board_literal[2] != '-':
-                    self.winner = self.board_literal[2]
-                    self.gameover = True
-            elif '-' not in self.board_literal:
-                print('Draw!')
-                self.winner = 'Draw'
-                self.gameover = True
+        i = self.board_literal
+        print(i)
+        x = ('X', 'X', 'X')
+        o = ('O', 'O', 'O')
+
+        if (i[0], i[1], i[2]) == x or (i[0], i[1], i[2]) == o:
+            self.winner = i[0]
+            self.gameover = True
+        elif (i[0], i[3], i[6]) == x or (i[0], i[3], i[6]) == o:
+            self.winner = i[0]
+            self.gameover = True
+        elif (i[0], i[4], i[8]) == x or (i[0], i[4], i[8]) == o:
+            self.winner = i[0]
+            self.gameover = True
+        elif (i[3], i[4], i[5]) == x or (i[3], i[4], i[5]) == o:
+            self.winner = i[3]
+            self.gameover = True
+        elif (i[6], i[7], i[8]) == x or (i[6], i[7], i[8]) == o:
+            self.winner = i[6]
+            self.gameover = True
+        elif (i[1], i[4], i[7]) == x or (i[1], i[4], i[7]) == o:
+            self.winner = i[1]
+            self.gameover = True
+        elif (i[2], i[5], i[8]) == x or (i[2], i[5], i[8]) == o:
+            self.winner = i[2]
+            self.gameover = True
+        elif (i[2], i[4], i[6]) == x or (i[2], i[4], i[6]) == o:
+            self.winner = i[2]
+            self.gameover = True
+        elif '-' not in i:
+            print('Draw!')
+            self.winner = 'Draw'
+            self.gameover = True
+
 

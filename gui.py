@@ -89,7 +89,9 @@ class GameBoard:
     def turn(self, *args):
             if not board.twoplayer:
                 board.playermove(self.var.get())
+                print(board.gameover)
                 board.checkboard()
+                print(board.gameover)
                 self.disable()
                 if not board.gameover:
                     board.opponentmove()
