@@ -81,6 +81,9 @@ class GameBoard:
                 self.btn9,
             ]
 
+        # checks who wants to start
+        self.firstmove()
+
     def disable(self):
         for index, i in enumerate(board.board_literal):
             if i != '-':
@@ -122,6 +125,7 @@ class GameBoard:
         for index, i in enumerate(self.btnlist):
             self.btnlist[index].config(state=NORMAL)
             self.btnlist[index].config(text=" ")
+        self.firstmove()
 
     def winner(self):
         if board.winner == 'X':
@@ -135,9 +139,16 @@ class GameBoard:
         if board.twoplayer:
             board.twoplayer = False
             self.toggle.config(text='Switch to Two Player Mode')
+            self.firstmove()
         elif not board.twoplayer:
             board.twoplayer = True
             self.toggle.config(text='Switch to Single Player Mode')
+
+    def firstmove(self):
+        if 'X' not in board.board_literal and 'O' not in board.board_literal:
+            if tkinter.messagebox.askyesno('Who goes first', 'Do you want the CPU to go first?'):
+                board.opponentmove()
+                self.disable()
 
 
 board = ttt.Board()
